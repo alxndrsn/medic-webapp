@@ -11,6 +11,7 @@ define( function( require, exports, module ) {
         require( 'enketo-core/src/widget/radio/radiopicker' ),
         require( 'enketo-core/src/widget/date/datepicker-extended' ),
         require( 'enketo-core/src/widget/time/timepicker-extended' ),
+        require( 'enketo-core/src/widget/file/filepicker' ),
         require( 'enketo-core/src/widget/datetime/datetimepicker-extended' ),
         require( 'enketo-core/src/widget/horizontal-choices/horizontalchoices' ),
         require( './widgets/notewidget' ),

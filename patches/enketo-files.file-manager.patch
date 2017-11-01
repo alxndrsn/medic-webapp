@@ -1,0 +1,60 @@
+*** node_modules_backup/enketo-core/src/js/file-manager.js	2017-08-18 01:49:03.000000000 +0100
+--- node_modules/enketo-core/src/js/file-manager.js	2017-11-02 15:56:25.000000000 +0100
+***************
+*** 50,64 ****
+   * @param  {?string|Object} subject File or filename
+   * @return {[type]}         promise url string or rejection with Error
+   */
+! function getFileUrl( subject ) {
+      return new Promise( function( resolve, reject ) {
+          var error, reader;
+  
+          if ( !subject ) {
+              resolve( null );
+          } else if ( typeof subject === 'string' ) {
+!             // TODO obtain from storage
+!             reject( 'no!' );
+          } else if ( typeof subject === 'object' ) {
+              if ( _isTooLarge( subject ) ) {
+                  error = new Error( 'File too large' );
+--- 50,72 ----
+   * @param  {?string|Object} subject File or filename
+   * @return {[type]}         promise url string or rejection with Error
+   */
+! function getFileUrl( inputElement, subject ) {
+      return new Promise( function( resolve, reject ) {
+          var error, reader;
+  
+          if ( !subject ) {
+              resolve( null );
+          } else if ( typeof subject === 'string' ) {
+!             var angularServices = angular.element( document.body ).injector();
+!             var fileReaderService = angularServices.get( 'FileReader' );
+!             var db = angularServices.get( 'DB' )();
+!             var attachmentName =  'user-file' + inputElement.getAttribute( 'name' );
+!             var reportDoc = angular.element( inputElement ).scope().$parent.selected[ 0 ].doc;
+! 
+!             return db.getAttachment( reportDoc._id, attachmentName )
+!                 .then( fileReaderService )
+!                 .then( resolve )
+!                 .catch( reject );
+          } else if ( typeof subject === 'object' ) {
+              if ( _isTooLarge( subject ) ) {
+                  error = new Error( 'File too large' );
+***************
+*** 159,165 ****
+   * @return {Boolean}      [description]
+   */
+  function _isTooLarge( file ) {
+!     return false;
+  }
+  
+  module.exports = {
+--- 167,173 ----
+   * @return {Boolean}      [description]
+   */
+  function _isTooLarge( file ) {
+!     return file && file.size > 32 * 1024;
+  }
+  
+  module.exports = {
