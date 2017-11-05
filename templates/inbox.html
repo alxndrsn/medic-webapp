@@ -28,8 +28,23 @@
       <span class="snackbar-content"></span>
     </div>
 
+    <script>
+    var inboxStart = performance.now();
+    </script>
     <script src="<%= baseURL %>/static/dist/inbox.js" type="text/javascript"></script>
+    <script>
+    var inboxEnd = performance.now();
+    console.log('inbox.js took ' + (inboxEnd - inboxStart) + 'ms');
+    </script>
+
+    <script>
+    var start = performance.now();
+    </script>
     <script src="<%= baseURL %>/static/dist/templates.js" type="text/javascript"></script>
+    <script>
+    var end = performance.now();
+    console.log('templates.js took ' + (end - start) + 'ms');
+    </script>
 
   </body>
 </html>

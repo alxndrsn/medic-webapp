@@ -203,6 +203,13 @@ module.exports = function(grunt) {
       }
     },
     exec: {
+      optimizeJs: {
+        cmd: './node_modules/.bin/optimize-js ./static/dist/inbox.js > ./static/dist/inbox.js.bak && ' +
+                                          'mv ./static/dist/inbox.js.bak ./static/dist/inbox.js && ' +
+//             './node_modules/.bin/optimize-js ./static/dist/templates.js > static/dist/templates.js.bak && ' +
+//                                          'mv ./static/dist/templates.js.bak ./static/dist/templates.js + '
+           'true',
+      },
       deploy: {
         cmd: 'kanso push $COUCH_URL'
       },
@@ -500,7 +507,8 @@ module.exports = function(grunt) {
     'copy:libphonenumber',
     'browserify:dist',
     'replace:hardcodeappsettings',
-    'ngtemplates'
+    'ngtemplates',
+    'exec:optimizeJs',
   ]);
 
   grunt.registerTask('mmcss', 'Build the CSS resources', [
