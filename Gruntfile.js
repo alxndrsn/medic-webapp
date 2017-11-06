@@ -207,8 +207,7 @@ module.exports = function(grunt) {
         cmd: './node_modules/.bin/optimize-js ./static/dist/inbox.js > ./static/dist/inbox.js.bak && ' +
                                           'mv ./static/dist/inbox.js.bak ./static/dist/inbox.js && ' +
              './node_modules/.bin/optimize-js ./static/dist/templates.js > static/dist/templates.js.bak && ' +
-                                          'mv ./static/dist/templates.js.bak ./static/dist/templates.js + '
-           'true',
+                                          'mv ./static/dist/templates.js.bak ./static/dist/templates.js',
       },
       deploy: {
         cmd: 'kanso push $COUCH_URL'
