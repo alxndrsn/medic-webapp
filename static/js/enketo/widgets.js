@@ -5,6 +5,11 @@ if ( typeof exports === 'object' && typeof exports.nodeName !== 'string' && type
 }
 
 define( function( require, exports, module ) {
+    var fileManager = require( 'enketo-core/src/js/file-manager' );
+    fileManager.isTooLarge = function( file ) {
+        return file && file.size > 32 * 1024;
+    };
+
     var widgets = [
         require( 'enketo-core/src/widget/geo/geopicker' ),
         require( 'enketo-core/src/widget/table/tablewidget' ),

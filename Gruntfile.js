@@ -283,11 +283,6 @@ module.exports = function(grunt) {
             // patch pouch to improve safari checks
             // https://github.com/medic/medic-webapp/issues/2797
             'patch node_modules/pouchdb-adapter-idb/lib/index.js < patches/pouchdb-ignore-safari-check.patch',
-
-            // patch enekto file-manager to limit uploaded file size
-            // This can be removed when https://github.com/enketo/enketo-core/issues/465 has been resolved
-            'patch node_modules/enketo-core/src/js/file-manager.js < patches/enketo-files.file-manager.patch',
-            'patch node_modules/enketo-core/src/widget/file/filepicker.js < patches/enketo-files.filepicker.patch',
           ];
           return patches.join(' && ');
         }
